@@ -1,0 +1,15 @@
+*.aux
+*.dvi
+*.nav
+*.out
+*.snm
+*.vrb
+*.toc
+*.log
+*.backup
+*.orig
+Clase1/clase1.pdf
+Clase2/clase2.pdf
+Clase3/clase3.pdf
+Clase4/clase4.pdf
+*~
