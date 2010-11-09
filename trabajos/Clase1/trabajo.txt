@@ -1,0 +1,12 @@
+Al final de esta clase los chicos saben:
+	- Compilar un programa
+	- Uso de variables y funciones
+	- Entrada Salida estandar
+
+El trabajo que propongo es que armen una calculadora, que tome los parametros
+desde la entrada estandar y vaya mostrando los resultados.
+
+La calculadora debera trabajar con numeros enteros.
+Entre las funciones deberàmplementar factorial y otras funciones de
+complejidad similar.
+

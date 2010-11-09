@@ -1,0 +1,9 @@
+Ya conoce como manejar polimorfismo
+
+Podria ser que cada operacion de la calculadora sea un comando (pattern)
+
+Podriamos hacerle definir una calculadora que utilice notacion polaca inversa
+
+Tendria que implementar una pila donde se guardan los operandos y operadores
+
+Puede aplicar el concepto de Functor

@@ -1,0 +1,43 @@
+Google Test
+-----------
+ - Enseñarles a partir del tutorial
+ - 
+
+Posibles Problemas
+------------------
+
+  SDL
+  ---     
+Leer un NCL simplificado (un XML) y mostrarlo en pantalla.
+Para leer el XML pueden usar TinyXML
+Para mostrar usarìan SDL. 
+El NCL simplificado podrìa incorporar texto e imagenes.
+No incorporarìa nada de las transiciones.
+
+QT
+--
+Leer un NCL simplificado (un XML) y generar una ventana.
+Para leer el XML usan QtXML y para mostrarlo los Widgets nativos de QT
+
+
+Carousel
+--------
+
+Originalmente se me habìa ocurrido que ellos tengan que montar el carousel de datos
+y luego mostrar un NCL especifico que viene.
+
+Recibirian los componentes de un Carousel de Datos como objetos (no tienen que parsear los TS).
+Deberían descartar mensajes con errores (proveemos un método para saberlo).
+
+Ellos deberían recibir todos los objetos que sean necesarios para poder armarlo. 
+Una vez armado mostrarìan con SDL el "NCL" simplificado.
+
+Con esto aplican Boost::filesystem. ademas de lo mismo que SDL.
+
+Ideas:
+ - Habría que darle parte de la implementación y que ellos completen
+
+- Rako propuso que esto se podría dejar este ejercicio de construcción de test-cases, 
+mas acotado y en donde tendrían que ver los casos de pruebas necesarios. En este caso nosotros
+proveemos el còdigo a probar + los datos de prueba (?)
+

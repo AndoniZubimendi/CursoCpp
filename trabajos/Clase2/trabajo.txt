@@ -1,0 +1,10 @@
+Al final de esta clase los chicos saben:
+	- Manejo basico de Clases
+	- Conocimiento de mas tipos de datos.
+	- Introduccion al Testing.
+	- Separacion en multiples archivos
+
+Por un lado pueden mejorar y modularizar de mejor manera el ejercicio de la
+practica anterior. Agregar los tests necesarios para asegurarnos la correcta
+implementacion.
+
