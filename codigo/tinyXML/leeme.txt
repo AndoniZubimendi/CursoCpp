@@ -1,0 +1,6 @@
+Esta es la base para los ejercicios del curso de C++
+
+- El código va en el directorio src/
+- Los tests en el directorio test
+- La documentacion del proyecto en docs
+
