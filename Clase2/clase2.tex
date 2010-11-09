@@ -1,0 +1,426 @@
+\documentclass{beamer}
+\special{landscape}
+
+%\usetheme{Berlin}
+\usetheme{Warsaw}
+
+%\usecolortheme{seahorse}
+%\usefonttheme[onlysmall]{structurebold}
+
+\setbeamertemplate{headline}[split]
+\setbeamertemplate{footline}[default]
+\setbeamertemplate{footline}[miniframes theme]
+%\logo{\includegraphics[scale=0.25]{lifia_logo.png}}
+
+\mode<presentation>
+\usepackage[spanish]{babel}
+\usepackage{beamerthemesplit}
+\usepackage[utf8]{inputenc}
+\usepackage{color}      % use if color is used in text
+
+
+% Comandos en modo Verbatim
+%\usepackage{fancyvrb}
+
+
+\title{Curso C++ - Clase 2}
+\author{Juan Antonio Zubimendi\\azubimendi@lifia.info.unlp.edu.ar}
+
+\institute{LIFIA}
+%\date{24/04/2008}
+
+\AtBeginSection[]
+
+\begin{document}
+ 
+\begin{frame}
+\frametitle{}
+\titlepage
+\end{frame}
+
+
+\section{Otros tipos de Datos}
+
+\subsection{Arreglos}
+\begin{frame}[fragile]
+\frametitle{Arreglos}
+Los arreglos se definen de la siguiente manera:
+
+\begin{verbatim}
+  <tipo> nombre_arreglo[<tamaño>];
+\end{verbatim}
+
+Se puede inicializar el arreglo si se desea.
+El indice del primer elemento es 0.
+El \emph{tamaño} puede ser ser un valor constante, o una expresión entera no negativa.
+\begin{verbatim}
+  int n = 5;
+  char caracteres[n];
+\end{verbatim}
+
+\end{frame}
+
+\subsection{typedef}
+\begin{frame}[fragile]
+\frametitle{typedef}
+Define un alias de tipo. No se define un tipo de datos nuevo, sino otro nombre para el mismo tipo de datos.
+
+\begin{verbatim}
+ typedef tipoExistente tipoNuevo;
+\end{verbatim}
+
+\end{frame}
+
+\subsection{enum}
+\begin{frame}[fragile]
+\frametitle{enum}
+Define un tipo de datos enumerado.
+\begin{verbatim}
+ enum <nombre> {
+    PRIMERO,
+    SEGUNDO = 1,
+    TERCERO,
+    CUARTO
+ };
+\end{verbatim}
+
+El tipo será un alias de \emph{int}, los valores seran autoincrementales. Si no se asigna ningún valor inicial, el primer valor será 0.
+\end{frame}
+
+\subsection{struct}
+\begin{frame}[fragile]
+\frametitle{struct}
+Definen tipos de datos propios. Definen un conjunto de campos y/o funciones propias.
+
+\begin{verbatim}
+struct Cuadrado {
+  int lado;
+  int area() { return lado * lado; }
+};
+\end{verbatim}
+
+Puedo acceder a los miembros de una estructura:
+\begin{verbatim}
+  Cuadrado c;
+  c.lado = 5;
+\end{verbatim}
+
+\end{frame}
+
+
+\section{Clases}
+\begin{frame}[fragile]
+\frametitle{Clases}
+
+Para definir una clase usamos:
+\begin{verbatim}
+  class Punto {
+    private:
+      int x, y;
+     public:
+      int getX() { return x;}
+      int getY() { return y;}
+  };
+\end{verbatim}
+
+\end{frame}
+
+\subsection{Visibilidad}
+\begin{frame}
+\frametitle{Visibilidad}
+Cada miembro de una clase puede tener una de estas tres visibilidades:
+\begin{itemize}
+ \item Public: El acceso a este miembro de la estructura es irrestricto.
+ \item Private: Solo se puede acceder dentro de la misma clase.
+ \item Protected: La clase y sus subclases pueden acceder a este miembro.
+\end{itemize}
+
+Dentro de la declaración de la clase se puede definir la visibilidad escribiendo
+ la misma seguida por dos puntos para indicar que de ahí en adelante todo lo que se declare tendrá esa visibilidad.
+Si no se indica nada la visibilidad será \emph{Private}.
+\begin{block}{}
+ \emph{struct} y \emph{class} son totalmente equivalentes, la única diferencia es la visibilidad que ofrecen por omisión.
+\end{block}
+
+\end{frame}
+
+\subsection{Métodos}
+\begin{frame}[fragile]
+\frametitle{Métodos}
+   Los métodos se pueden definir en la misma declaración de la clase. \\
+   Pero es preferible definir una función fuera de la declaración de la clase. 
+   \begin{verbatim}
+    class Cuadrado {
+        Cuadrado(int lado);
+      private:
+        int _lado;
+      public:
+        int area();
+    };
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Métodos}
+   
+   Una vez definida la clase, hacemos:
+\begin{verbatim}
+  int Cuadrado::Cuadrado(int lado) {
+       _lado = lado;
+  }
+
+  int Cuadrado::area() {
+      return lado * lado;
+  }
+\end{verbatim}
+
+\begin{block}
+Es conveniente separar la declaración y la definición en archivos diferentes.
+\end{block}
+\end{frame}
+
+\subsection{Ciclo de Vida de los objetos}
+
+\begin{frame}
+\frametitle{Constructores}
+
+\end{frame}
+
+\subsection{Constructores}
+\begin{frame}
+\frametitle{Constructores}
+
+\begin{itemize}
+ \item Sobrecarga
+ \item Construcción
+\end{itemize}
+
+\end{frame}
+
+\subsection{Destructores}
+\begin{frame}
+\frametitle{Destructores}
+
+\begin{block}
+Acordarse de liberar recursos
+\end{block}
+
+\end{frame}
+
+\subsection{Variables y Métodos de Clase}
+\begin{frame}[fragile]
+\frametitle{Variables y Métodos de Clase}
+   Los métodos y variables de clase, se definen de la misma manera que los de instancia, la única diferencia
+   es que se antepone la palabra clave \emph{static} antes de la declaración del método o variable. \\
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{verbatim}
+  class Figura {
+    public:
+        Figura();
+        static int figurasTotales();
+
+    private:
+      static int _totalFiguras;
+
+  };
+
+  Figura::_totalFiguras = 0;
+  int figurasTotales() {
+      return _totalFiguras;
+  }
+\end{verbatim}
+
+\end{frame}
+
+\section{Operador const}
+\begin{frame}
+\frametitle{Uso de const}
+  \emph{const} afecta de diferentes maneras a las expresiones donde aparece.
+
+\begin{itemize}
+ \item Como modificador - antes - de una variable, es una constante.
+ \item Como modificador - antes - de un párametro, que ese parámetro no se puede modificar.
+
+ \item Al final la declaración de un metodo, que dicho método no modifica el estado del objeto. Esto le permite al compilador realizar optimizaciones.
+\end{itemize}
+\end{frame}
+
+\subsection{Referencias}
+\begin{frame}
+\frametitle{Referencias}
+  
+ Una referencia es un alias de una variable.
+
+\end{frame}
+
+\subsection{Referencias constantes y el pasaje de parámetros}
+\begin{frame}
+\frametitle{Referencias}
+  
+ Una referencia es un alias de una variable.
+
+\end{frame}
+
+
+\section{Operador static}
+\begin{frame}
+\frametitle{Uso de static}
+  El modificador \emph{static} se puede utilizar
+
+\begin{itemize}
+ \item Como modificador - antes - de una variable global o función, esta función o variable no se podrá utilizar fuera del archivo donde este definido.
+ \item Como modificador - antes - de una variable local a una función o método, esta variable no se destruirá cuando la función termine, persistiendo su valor a través de las diferentes llamadas a la misma.
+\end{itemize}
+\end{frame}
+
+\section{Trabajando con muchos archivos}
+
+\begin{frame}
+\frametitle{Trabajando con multiples archivos}
+Es conveniente
+\begin{itemize}
+ \item Separar cada objeto en un archivo distinto, para 
+ \item Separar la implementación de la interfaces de los objetos.
+\end{itemize}
+
+\end{frame}
+
+\subsection{Trabajando con muchos archivos}
+
+\begin{frame}
+\frametitle{Separar implementación de interfaz}
+Sabiendo que C++ separa claramente la definición de la declaración de tipos de datos y de funciones, podemos usar eso para realizar la separación.
+\begin{itemize}
+ \item En archivos de encabezados ``\emph{headers}'': Pondremos las definiciones. Estos archivos suelen llevar la extensión \emph{.h}.
+ \item En archivos de implementación escribiremos las definiciones, pero incluyendo previamente las declaraciones necesarias.
+ \item Si existe una dependencia de una clase con otra, podremos incluir el respectivo archivo de encabezado para que el compilador pueda acceder correctamente a todas las clases.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Archivos de Encabezados}
+\begin{frame}
+\frametitle{Archivo de encabezados}
+\begin{itemize}
+ \item Estos archivos suelen tener la extensión \emph{.h} y llevan el mismo nombre que el archivo de implementación.
+ \item Aqui escribiremos todas las definiciones que necesitemos usar del archivo de implementación.
+ \item Los archivos de encabezado se incluyen con la directiva de preprocesador \emph{\#incldue}.
+\end{itemize}
+
+\end{frame}
+
+\subsection{Guardas en los encabezados}
+\begin{frame}[fragile]
+\frametitle{Guardas en los archivos de encabezados}
+a.h:
+\begin{verbatim}
+#include "b.h"
+
+struct A
+{
+  struct B *b;
+} A;
+\end{verbatim}
+
+b.h:
+\begin{verbatim}
+#include "a.h"
+
+typedef struct B
+{
+  struct A *a;
+} B;
+\end{verbatim}
+
+¿Qué pasa aca?
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Guardas en los archivos de encabezados}
+Para evitar esto, usamos guardas sobre los archivos de encabezados.
+
+\begin{verbatim}
+#ifndef __A_H__
+#define __A_H__
+
+#include "b.h"
+
+struct A
+{
+  struct B *b;
+} A;
+
+#endif
+\end{verbatim}
+
+b.h:
+\begin{verbatim}
+#ifndef __B_H__
+#define __B_H__
+
+#include "a.h"
+
+typedef struct B
+{
+  struct A *a;
+} B;
+
+#endif
+\end{verbatim}
+
+
+\end{frame}
+
+\subsection{Archivos de Implementación}
+\begin{frame}
+ \frametitle{Archivo de implementación}
+\begin{itemize}
+
+ \item Estos archivos suelen tener la extensión \emph{.cpp}, o \emph{.cxx}
+ \item Este archivo incluye (mediante \emph{\#include}) el archivo de encabezado propio y los demas archivos de encabezados que necesite.
+\end{itemize}
+
+\end{frame}
+
+\section{Testing - Google Test}
+
+\subsection{Introducción}
+\begin{frame}
+\frametitle{Google Test}
+Vamos a ver como utilizar una librería de Test de Unidad de C++. \\
+¿Por qué Google Test?
+\begin{itemize}
+ \item Porque está basada en la arquitectura xUnit (sUnit, jUnit...)
+ \item Porque es fácil de usar
+ \item Porque es software libre
+\end{itemize}
+
+La página web del sitio está en http://code.google.com/p/googletest/
+
+\end{frame}
+
+\subsection{Instalación}
+\begin{frame}
+\frametitle{Instalación de Google Test}
+Los pasos son:
+\begin{itemize}
+ \item Descargar la librería
+ \item Descomprimirla, ejecutando: \emph{tar xjf gtest-1.5.2.tar.bz2}
+ \item Compilarla, ejecutando: \emph{make}
+ \item Instalarla, ejecutando: \emph{make install}
+\end{itemize}
+
+\end{frame}
+
+\subsection{Uso}
+\begin{frame}
+\frametitle{Instalación de Google Test}
+En el curso le proveemos un ejemplo completo basado en el tutorial. \\
+La Wiki del proyecto posee una buena introducción:
+  http://code.google.com/p/googletest/wiki/Primer
+\end{frame}
+
+\end{document}
+

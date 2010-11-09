@@ -1,0 +1,582 @@
+% Clase 1
+% --------
+
+\documentclass{beamer}
+\special{landscape}
+
+%\usetheme{Berlin}
+\usetheme{Warsaw}
+
+%\usecolortheme{seahorse}
+%\usefonttheme[onlysmall]{structurebold}
+
+\setbeamertemplate{headline}[split]
+\setbeamertemplate{footline}[default]
+\setbeamertemplate{footline}[miniframes theme]
+%\logo{\includegraphics[scale=0.25]{lifia_logo.png}}
+
+\mode<presentation>
+\usepackage[spanish]{babel}
+\usepackage{beamerthemesplit}
+\usepackage[utf8]{inputenc}
+\usepackage{color}      % use if color is used in text
+
+% Comandos en modo Verbatim
+%\usepackage{fancyvrb}
+
+\title{Curso C++ - Clase 1}
+\author{Juan Antonio Zubimendi\\azubimendi@lifia.info.unlp.edu.ar}
+
+\institute{LIFIA}
+%\date{24/04/2008}
+
+\AtBeginSection[]
+
+\begin{document}
+ 
+\begin{frame}
+%\frametitle{Presentación}
+\titlepage
+\end{frame}
+
+\section{Introducción}
+
+\begin{frame}
+\frametitle{Conceptos básicos}
+Asumimos estos conocimientos
+\begin{itemize}
+ \item Programación Orientada a Objetos
+ \item Conocimientos básicos de Java o lenguaje similar
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Introducción}
+En en curso vamos a 
+\begin{itemize}
+ \item Programar en C++
+ \item Utilizar el entorno GNU/Linux
+\end{itemize}
+\end{frame}
+
+\section{Preprocesador}
+\subsection{Introducción}
+\begin{frame}
+\frametitle{Preprocesador}
+Como primer paso de la compilación, se invoca al preprocesador. \\
+El preprocesador transforma el archivo de entrada en una salida a través de directivas que se encuentran en la entrada. \\
+Estas directivas se reconocen por el \# inicial. \\
+Estas directivas no son especificas del lenguaje C++. 
+\begin{itemize}
+ \item \#include
+ \item \#define
+ \item \#if
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\#include}
+Esta directiva incluye el archivo especificado entre comillas o $<$ y $>$.
+\begin{itemize}
+ \item \emph{entre comillas}: El archivo lo busco en el directorio actual
+ \item \emph{entre $<$ y $>$}: El archivo se busca en los directorios de librerias del sistema 
+\end{itemize}
+Al archivo incluido también se le aplica el preprocesador.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\#define}
+Nos permite definir constantes y macros. \\
+En este curso, solo vamos a usar las constantes. \\
+Es costumbre que las constantes definidas de esta manera se escriban todas en mayuscula.
+
+\begin{verbatim}
+ #define PI 3.14159
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\#ifdef, \#endif, \#if}
+
+Con estas directivas podemos hacer ciertas partes del código fuente se compilen
+condicionalmente.
+
+Ejemplo:
+\begin{verbatim}
+ #ifdef PI
+    perimetro = 2 * PI * radio; 
+ #else
+    perimetro = 6.28 * radio;
+ #endif
+\end{verbatim}
+
+\end{frame}
+
+\section{Hola mundo}
+
+\begin{frame}[fragile]
+\frametitle{Hola mundo}
+
+\begin{verbatim}
+ #include <iostream>
+ 
+ int main(int argc, char *argv[]) {
+    std::cout << "Hola Mundo" << std::endl;
+    return 0;
+ }
+\end{verbatim}
+
+\end{frame}
+
+\subsection{función main}
+
+\begin{frame}[fragile]
+\frametitle{función main}
+
+Todo programa de C++ se inicia invocando a la función main, cuya forma es:
+\begin{verbatim}
+   int main(int argc, char *argv[])
+\end{verbatim}
+\end{frame}
+
+\subsection{Entrada Salida}
+\begin{frame}[fragile]
+\frametitle{Entrada Salida}
+
+La entrada salida básica provista por el lenguaje C++ la hacemos utilizando librerías estándar de C++.
+\begin{itemize}
+ \item Para leer datos desde el teclado utilizamos \emph{std::cin}.
+ \item Para mostrar datos a la pantalla utilizamos \emph{std::cout}.
+\end{itemize}
+
+Más adelante veremos como utilizarlo.
+\end{frame}
+
+\subsection{Archivos Encabezados}
+\begin{frame}
+\frametitle{Archivos Encabezados}
+
+\begin{itemize}
+ \item Contienen información sobre las diferentes librerias, funciones y constantes que usamos en nuestro programa.
+ \item Los utilizamos con la directiva de preprocesador \#include.
+ \item Pueden formar parte de librerías estandares de C++, librerías de terceros o parte de nuestro proyecto.
+\end{itemize}
+\end{frame}
+
+\subsection{Compilando en Línea de Comandos}
+\begin{frame}[fragile]
+\frametitle{Línea de Comandos}
+Para compilar el ejemplo podemos escribir:
+\begin{verbatim}
+  g++ -o holaMundo holaMundo.cpp
+\end{verbatim}
+o también:
+\begin{verbatim}
+  g++ -c -o holaMundo.o holaMundo.cpp
+  g++ -o holaMundo holaMundo.o
+\end{verbatim}
+\end{frame}
+
+\section{Tipos de Datos básicos}
+%TODO: Verificar que este bien. sobre todo int, long y esas yerbas
+\begin{frame}
+\frametitle{Tipos de Datos básicos}
+\begin{itemize}
+ \item \emph{bool}: \emph{true} y \emph{false}
+ \item \emph{char}: 8 bits, -128 a 127.
+ \item \emph{short}: Enteros, dependende de la plataforma.
+ \item \emph{long}: Enteros de 32 bits.
+ \item \emph{long long}: Enteros de 64 bits.
+ \item \emph{float}: Números racionales de 32 bits.
+ \item \emph{double}: Números racionales de 64 bits.
+ \item \emph{long double}: Números racionales de 80 bits.
+\end{itemize}
+También tenemos las variantes \emph{unsigned} para la mayoria de los tipos.
+\end{frame}
+
+\subsection{Definición}
+
+\begin{frame}[fragile]
+\frametitle{Declaracion}
+\begin{itemize}
+ \item Toda variable debe ser definida antes de ser usada.
+ \item En el momento de definir una variable, se le puede asignar un valor.
+ \item Salvo las variables globales, hay que inicializar todas las variables.
+
+\begin{verbatim}
+  int entero1;
+  char c = 'H';
+  bool cond1, cond2, cond3;
+\end{verbatim}
+\end{itemize}
+
+\end{frame}
+
+\subsection{Asignación}
+
+\begin{frame}[fragile]
+\frametitle{Asignación}
+\begin{itemize}
+ \item Para asignarle un valor: $<$variable$>$ = $<$valor$>$;
+\end{itemize}
+\begin{verbatim}
+  int entero1;
+  entero1 = 25;
+  float x = entero1 * 2.0;
+\end{verbatim}
+
+\end{frame}
+
+\subsection{Operadores}
+
+\begin{frame}
+\frametitle{Operadores}
+\begin{itemize}
+ \item $+$, $-$, $*$
+ \item $/$, división entera si los tipos son enteros.
+ \item \%: modulo 
+ \item Mascaras de Bits: \^, \&, $|$, $~$
+ \item $==$, $!=$, \&\&, $||$, $!$
+ \item $<$, $<=$, $>$, $>=$
+ \item $+=$, $*=$, ...
+\end{itemize}
+
+\end{frame}
+
+% Acordarse de dif. Declaracion/Definición
+% Prototipos
+\section{Funciones}
+\begin{frame}[fragile]
+\frametitle{Funciones}
+Las funciones en C++ se definen de la siguiente manera:
+\begin{verbatim}
+   <tipo retorno> <nombre_función>(<parámetros>) {
+        ..
+        <instrucciones>
+        ..
+   }
+\end{verbatim}
+Si no necesitamos devolver parametros usamos el tipo \emph{void} como tipo de valor de retorno.
+La instrucción para devolver un valor y terminar la función es \emph{return}.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Funciones - Parámetros}
+Si la función no toma parámetros, puede usarse \emph{()} o \emph{(void)}.
+Los parámetros son una lista de parametros de la siguiente manera:
+\begin{verbatim}
+ tipo_variable parametro1 parametro1, 
+ tipo_variable_parametro2 parametro2...
+\end{verbatim}
+\begin{block}{IMPORTANTE}
+ Todas los parámetros se pasan por valor.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Funciones}
+
+Las funciones deben declararse antes de ser usadas. \\
+La definición de la función sirve como declaración. \\
+La declaración puede encontrarse en un archivo encabezado. \\
+La declaración de una función se hace de esta manera.
+\begin{verbatim}
+   <valor retorno> <nombre_función>(<parámetros>);
+\end{verbatim}
+A esto llamaremos prototipo de la función.
+\end{frame}
+
+\subsection{Sobrecarga}
+\begin{frame}[fragile]
+\frametitle{Sobrecarga de Funciones}
+Distintas implementaciones de la misma función se pueden definir. C++ llamará
+a la función que mejor coincida respecto de los parámetros. A esto se llama sobrecargar la función.
+
+La sobrecarga de funciones debe cumplir estas reglas:
+\begin{itemize}
+ \item Las diferentes implementaciones deben recibir diferentes tipos de parámetros o cantidad de los mismos.
+ \item El tipo de retorno no es relevante para diferenciar 2 implementaciones de la misma función.
+\end{itemize}
+
+\end{frame}
+
+\subsection{Valores por omisión de parámetros}
+\begin{frame}[fragile]
+\frametitle{Valores por omisión de parámetros}
+
+Se puede asignar valores predeterminados a un parámetro de una función y 
+obviarlo en el momento de invocar a dicha función. \\
+Luego de un parámetro con valor predeterminado, no puede haber un parámetro sin valor predeterminado.
+
+\begin{verbatim}
+   int potencia(int n, int pot = 2) {
+     ...
+   }
+
+   ...
+   int res = potencia(x + 1);
+\end{verbatim}
+
+
+\end{frame}
+
+% \begin{frame}[fragile]
+% \frametitle{Sobrecarga de Operadores}
+% De la misma manera que podemos realizar la sobrecarga de una función, podemos realizar
+% la sobrecarga de los operadores (+, -, =...).
+% 
+% En este curso no lo vamos a usar, pero existe posibilidad de hacerlo.
+% La manera de hacerlo es:
+% int operator=(int x, int y);
+% 
+% \end{frame}
+
+\section{Control de flujo}
+
+\subsection{Instrucciones y Bloques}
+\begin{frame}
+\begin{itemize}
+ \item Cada instrucción deberá terminar con $;$
+ \item Los bloques pueden contener 0, 1 o más instrucciones. 
+ \item Los bloques definen un nuevo alcance para las variables que definamos dentro de ese bloque, como veremos más adelante.
+ \item En cualquier lugar donde es legal poner una instrucción, se puede insertar un bloque de instrucciones.
+\end{itemize}
+\end{frame}
+
+\subsection{if}
+\begin{frame}[fragile]
+\frametitle{if}
+
+\begin{verbatim}
+ if (condicion) 
+   <instrucción o bloque si cond. verd>
+ else 
+   <instrucción o bloque si cond. falsa>
+ 
+\end{verbatim}
+
+\end{frame}
+
+\subsection{while}
+\begin{frame}[fragile]
+\frametitle{while}
+
+\begin{verbatim}
+  while (condición) 
+    <instrucción o bloque>
+  
+\end{verbatim}
+
+\begin{verbatim}
+  do 
+    <instruccion o bloque>
+  while (condición); 
+\end{verbatim}
+
+\end{frame}
+
+\subsection{switch}
+
+\begin{frame}[fragile]
+\frametitle{switch}
+
+\begin{verbatim}
+  switch(escalar) {
+  case <opción1>:
+  case <opción2>:
+      break;
+
+  case <opción3>:
+      break;
+  default:
+      break;
+  }
+\end{verbatim}
+
+\begin{block}
+ No olvidar el \emph{break}!
+\end{block}
+
+\end{frame}
+
+\subsection{Operador Ternario}
+\begin{frame}[fragile]
+\frametitle{Operador Ternario}
+El operador ternario nos permite escribir una expresión que puede devolver 1 de 2 valores posibles, dependendiendo de una condición.
+
+\begin{verbatim}
+  condición?<valor_verdadero>:<valor_falso>;
+\end{verbatim}
+ 
+\end{frame}
+
+\subsection{for}
+\begin{frame}[fragile]
+\frametitle{for}
+\begin{verbatim}
+  for (<inicio>; <condición fin>; <incremento>) 
+            <instrucción o bloque si cond. verd>
+\end{verbatim}
+
+En $<$inicio$>$ podemos definir una variable y su alcance será solamente la instrucción \emph{for}.
+\end{frame}
+
+\subsection{break}
+\begin{frame}
+\frametitle{break}
+El comando break sale del ciclo instantáneamente. Si hay ciclos anidados, sale del ciclo de mas interno.
+\end{frame}
+
+\subsection{continue}
+\begin{frame}
+\frametitle{continue}
+Corta la iteración actual del ciclo y arranca el ciclo nuevamente.
+\end{frame}
+
+
+\section{Alcance de una variable}
+
+\begin{frame}
+\frametitle{Alcance}
+Llamamos alcance a los lugares donde podemos referenciar una variable. \\
+El alcance de las variables depende donde fue definida. 
+\begin{itemize}
+ \item Si fue definida dentro de una función: Desde el punto donde fue definida, hasta el bloque o fin de la función.
+ \item Si fue definida fuera de una función: Desde el punto donde fue definida, hasta el fin del bloque donde fue definida, o el final de la función
+\end{itemize}
+
+\end{frame}
+
+
+\section{Declaración vs. definición}
+\begin{frame}
+\frametitle{Declaración vs. definición}
+
+\begin{itemize}
+ \item La declaración hace conocida la variable al compilador, sabe como ``tratarla''.
+ \item La definición hace la reserva de memoria. Una definición puede servir como declaración.
+ \item Toda variable o función puede estar declarada más de una vez, pero solo puede existir una sola defición de la misma.
+\end{itemize}
+Como hago una declaración:
+\begin{itemize}
+ \item \emph{función}: Escribo el prototipo de la función, seguida de $;$.
+ \item \emph{variable}: antepongo la palabra clave \emph{extern} a la definición de la variable (sin inicializarla).
+\end{itemize}
+
+\end{frame}
+
+\section{Entrada/Salida}
+
+\subsection{Concepto}
+\begin{frame}
+\frametitle{Concepto}
+La entrada salida de un programa en una terminal (consola) tiene tres flujos asociados:
+\begin{itemize}
+ \item \emph{stdout}: Llamada salida estándar, es donde vemos la salida de nuestro programa. Suele ser la terminal donde ejecutamos los programas.
+ \item \emph{stdin}: Llamada entrada estándar, es de donde se obtienen datos para nuestro programa. Suele asociarse a la entrada que usamos a través del teclado.
+ \item \emph{stderr}: Llamada error estándar: es donde los programas notifican errores al usuario. Es diferente a la salida estándar aunque ambas suelen escribir en la terminal.
+\end{itemize}
+
+En C++ existe una librería que nos provee este tipo de entrada salida.
+\end{frame}
+
+\subsection{Salida}
+\begin{frame}[fragile]
+\frametitle{std::cout}
+C++ cuenta con un objeto (provisto por una librería estándar) para realizar la salida a la terminal.
+Este objeto es \emph{std::cout}. Puede imprimir tanto cadenas de caracteres como variables.
+Para utilizarlo debemos incluir el archivo de encabezado \emph{<iostream>}.
+
+Modo de uso:
+\begin{verbatim}
+  int i = 5;
+  std::cout << "Hola Mundo - i = " << i << std::endl;
+\end{verbatim}
+
+Con \emph{std::endl} tenemos un salto de línea.
+\end{frame}
+
+\subsection{Entrada}
+\begin{frame}[fragile]
+\frametitle{std::cin}
+C++ además nos provee \emph{std::cin} que nos permite leer desde la entrada estàndar.
+Para utilizarlo debemos incluir el archivo de encabezado \emph{<iostream>}.
+
+Modo de uso:
+\begin{verbatim}
+  
+  int lado;
+  std::cout << "Medida del lado: ";
+  std::cin << lado;
+  std::cout << "El perimetro del cuadrado de lado  " << lado;
+  std::cout << " es " << (lado * 4) << std::endl;
+
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{std::cin - continuación}
+Si queremos leer cadenas de caracteres (strings) podemos usar un tipo de datos especial provisto como librería estándar.
+El tipo es \emph{std::string}.
+
+\begin{verbatim}
+  std::string nombre;
+  std::cout << "Como te llamas?";
+  std::cin << nombre;
+  std::cout << "Hola " << nombre << std::endl;
+\end{verbatim}
+
+Un problema es que \emph{std::cin} solo lee una palabra (se detiene ante el primer espacio). 
+Si queremos leer una línea completa, podemos utilizar \emph{std::getline}.
+
+\begin{verbatim}
+  std::string nombre;
+  std::getline(cin, nombre);
+  std::cout << "Hola " << nombre << std::endl;
+\end{verbatim}
+
+\end{frame}
+
+\section{CMake}
+
+\begin{frame}
+\frametitle{Introducción}
+CMake es una herramienta para la construcción de software.
+\begin{itemize}
+ \item Es Software Libre
+ \item Es multiplataforma
+ \item Puede construir proyectos basados en diferentes lenguajes
+ \item Las distribuciones de GNU/Linux suelen proveerlo como paquete oficial de la distribución.
+ \item Algunos entornos de desarrollo se integran bien con CMake
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{CMake}
+En el transcurso del Curso usaremos CMake como herramienta de construcción.
+Vamos a proveer plantillas para usar y poder crear sus proyectos fácilmente.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Como usarlo}
+\begin{itemize}
+ \item El código fuente de nuestro programas va en el directorio \emph{src}
+ \item Para compilar, preparamos haciendo:
+ \begin{verbatim}
+    mkdir build
+    cd build
+    cmake ..
+ \end{verbatim}
+  \item Ahora podemos compilar haciendo:
+ \begin{verbatim}
+    make
+ \end{verbatim}
+\end{itemize}
+
+\end{frame}
+
+\end{document}

@@ -1,0 +1,171 @@
+\documentclass{beamer}
+\special{landscape}
+
+%\usetheme{Berlin}
+\usetheme{Warsaw}
+
+%\usecolortheme{seahorse}
+%\usefonttheme[onlysmall]{structurebold}
+
+\setbeamertemplate{headline}[split]
+\setbeamertemplate{footline}[default]
+\setbeamertemplate{footline}[miniframes theme]
+%\logo{\includegraphics[scale=0.25]{lifia_logo.png}}
+
+\mode<presentation>
+\usepackage[spanish]{babel}
+\usepackage{beamerthemesplit}
+\usepackage[utf8]{inputenc}
+\usepackage{color}      % use if color is used in text
+
+% Comandos en modo Verbatim
+%\usepackage{fancyvrb}
+
+\title{Curso C++ - Clase 3}
+\author{Juan Antonio Zubimendi\\azubimendi@lifia.info.unlp.edu.ar}
+
+\institute{LIFIA}
+%\date{24/04/2008}
+
+\AtBeginSection[]
+
+\begin{document}
+ 
+
+\begin{frame}
+%\frametitle{Presentación}
+\titlepage
+\end{frame}
+
+\section{Memoria dinámica}
+\begin{frame}
+\frametitle{Memoria dinámica}
+Existen dos tipos de memoria de dinámica disponibles en C++:
+\begin{itemize}
+ \item \emph{Stack}: Esta memoria se utiliza para las variables locales a las funciones y métodos. Este memoria será devuelta cuando la función finalice.
+ \item \emph{Heap}: Con esto podemos obtener memoria para variables que necesitemos más allá del alcance de una función.
+\end{itemize}
+
+\end{frame}
+
+\subsection{Heap}
+\begin{frame}
+\frametitle{Heap}
+Para obtener y liberar memoria dinámica (de la Heap) tenemos dos instrucciones:
+\begin{itemize}
+ \item \emph{new}: Con esta instrucción pedimos memoria dinámica al sistema.
+ \item \emph{delete}: Con esta instrucción devolvemos al sistema la memoria asignada a una variable
+\end{itemize}
+
+Podemos obtener memoria para:
+\begin{itemize}
+ \item Para crear objetos
+ \item Para tipos básicos u otro tipo de datos.
+\end{itemize}
+
+\begin{block}{IMPORTANTE}
+   La administración de la memoria pedida con los operadores \emph{new} y \emph{delete} es total responsabilidad del programador.
+\end{block}
+
+\end{frame}
+
+\subsection{new}
+\begin{frame}[fragile]
+\frametitle{new}
+Con el operador \emph{new} podemos pedir memoria para un objeto o tipo de datos.
+
+El operador nos devuelve un puntero a la entidad recién construida. De ser necesario se pueden pasar los parámetros necesarios para el constructor.
+
+\begin{verbatim}
+   Casa *pCasa = new Casa;
+\end{verbatim}
+
+\end{frame}
+
+\subsection{delete}
+\begin{frame}
+\frametitle{delete}
+
+Con el operador \emph{delete} liberamos la memoria apuntada por el puntero que recibe como parámetro.
+El destructor correspondiente a ese objeto es llamado y la memoria liberada.
+
+\end{frame}
+
+\subsection{new [] y delete []}
+\begin{frame}
+\frametitle{new [] y delete []}
+
+\end{frame}
+
+\subsection{Punteros}
+\begin{frame}
+\frametitle{Punteros}
+  
+ - No solo de clases sino también de tipos básicos
+
+\end{frame}
+
+\subsection{Leaks}
+\begin{frame}
+\frametitle{Leaks}
+  
+
+\end{frame}
+
+\section{Clases}
+
+\subsection{operador this}
+\begin{frame}
+\frametitle{operador this}
+  Este operador hace referencia a la instancia especifica de la clase. Es de tipo puntero 
+\end{frame}
+
+\section{Herencia de clases}
+\begin{frame}
+\frametitle{Herencia de clases}
+Herencia multiple.
+\end{frame}
+
+\subsection{Subclases}
+\begin{frame}[fragile]
+\frametitle{Subclases}
+
+Para definir una subclase lo hacemos de la siguiente manera:
+
+\begin{verbatim}
+
+ class Cuadrado : public Figura {
+ 
+ };
+\end{verbatim}
+
+\end{frame}
+
+\subsection{Clases abstractas}
+\begin{frame}
+\frametitle{Clases abstractas}
+
+ = 0 en los métodos.
+\end{frame}
+
+\subsection{Interfaces}
+\begin{frame}
+\frametitle{Interfaces}
+  - Podemos usar la herencia multiple para definir interfaces
+\end{frame}
+
+\subsection{Métodos virtuales}
+\begin{frame}
+\frametitle{Métodos virtuales}
+Que significa? 
+Diferencias con otros lenguajes
+\end{frame}
+
+\subsection{Punteros y Polimorfismo}
+\begin{frame}
+\frametitle{Punteros y Polimorfismo}
+\end{frame}
+
+
+\end{document}
+
