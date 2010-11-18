@@ -179,30 +179,63 @@ Es conveniente separar la declaración y la definición en archivos diferentes.
 \end{block}
 \end{frame}
 
-\subsection{Ciclo de Vida de los objetos}
-
-\begin{frame}
-\frametitle{Constructores}
-
-\end{frame}
-
 \subsection{Constructores}
-\begin{frame}
+
+\begin{frame}[fragile]
 \frametitle{Constructores}
 
-\begin{itemize}
- \item Sobrecarga
- \item Construcción
-\end{itemize}
+Cada clase posee por lo menos un constructor.
+
+Si no indicamos uno especificamente, se creara uno sin parámetros.
+
+Los constructores son funciones de una clase con el mismo nombre de la clase.
+
+Podemos tener más de un constructor, es decir podemos sobrecargarlo.
+
+Creamos instancias de un objeto invocando a uno de los constructores de la clase.
+
+En el constructor podemos reservar e inicializar los aspectos del objeto que sean necesarios.
 
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Ejemplo}
+\begin{verbatim}
+ 
+  class Figura {
+    public:
+      Figura(int lados);
+      Figura();
+
+      int lados() const;
+  };
+\end{verbatim}
+
+\end{frame}
+
+%\begin{frame}
+%\frametitle{Constructores importantes}
+%
+%\begin{itemize}
+% \item Constructor de copia
+%\end{itemize}
+%
+%\end{frame}
 
 \subsection{Destructores}
 \begin{frame}
 \frametitle{Destructores}
 
+Cuando un objeto va a ser destruido se invoca al destructor de la clase.
+
+El destructor es uno solo, a diferencia de los constructores. 
+
+El destructor no toma parámetros ni devuelve parámetros.
+
+El nombre del método será un $~$ seguido del nombre de la clase.
+
 \begin{block}
-Acordarse de liberar recursos
+Acordarse de liberar recursos utilizados por el objeto.
 \end{block}
 
 \end{frame}
@@ -248,23 +281,44 @@ Acordarse de liberar recursos
 \end{frame}
 
 \subsection{Referencias}
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Referencias}
   
  Una referencia es un alias de una variable.
 
+ Definimos una referencia de la siguiente manera:
+
+\begin{verbatim}
+   int entero;
+
+   int & referencia = entero;
+\end{verbatim}
+
+Una vez asociada una referencia con una variable, no se puede cambiar. En el momento de definir la referencia hay que asociarla a la variable a la que hacemos referencia.
+
+Dentro de una función o método podemos retornar una referencia a una variable.
+
+
+\begin{block}
+ OJO! Con las referencias a las variables locales
+\end{block}
+
 \end{frame}
 
-\subsection{Referencias constantes y el pasaje de parámetros}
-\begin{frame}
+\subsection{Referencias y el pasaje de parámetros}
+\begin{frame}[fragile]
 \frametitle{Referencias}
-  
- Una referencia es un alias de una variable.
 
+Hasta ahora habiamos visto que todas las pasajes de parámetros a funciones o métodos eran por valor, ahora vemos que también podemos pasar parámetros por referencia:
+
+\begin{verbatim}
+   Matriz multiplicar(Matriz &m, Matriz &n);
+\end{verbatim}
+Si no pasaramos por referencia, los objetos 
 \end{frame}
-
 
 \section{Operador static}
+
 \begin{frame}
 \frametitle{Uso de static}
   El modificador \emph{static} se puede utilizar

@@ -91,24 +91,105 @@ El destructor correspondiente a ese objeto es llamado y la memoria liberada.
 
 \end{frame}
 
+\subsection{Punteros}
+\begin{frame}[fragile]
+\frametitle{Punteros}
+
+Un puntero nos permite un acceso indirecto a un objeto al cual esta apuntando.
+Dependiendo al tipo de objeto que apunte, será el tipo de puntero.
+Para definir un puntero usamos $*$ antes del nombre de la variable:
+
+\begin{verbatim}
+   int * pEntero = new int;
+\end{verbatim}
+
+¿Cómo accedemos al valor ``apuntado''?
+
+El acceso al valor apuntado se llama desreferenciar y se puede hacer con el operador $*$:
+
+\begin{verbatim}
+   *pEntero = 5;
+\end{verbatim}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Punteros - continuación}
+
+\begin{verbatim}
+    class Punto {
+      public:
+	  Punto(int x, int y);
+	  int getX();
+          int getY();
+      private:
+	  int _x, _y;
+    };
+
+    Punto * p = new Punto(10,10);
+\end{verbatim}
+
+Como puedo invocar al metodo \emph{getX} de \emph{p} ?
+
+\begin{verbatim}
+    std::cout "Pos X: " << (*p).getX() << std::endl;
+\end{verbatim}
+
+Como el acceso a miembros de una estructura o clase a partir de un puntero es una operación común, tenemos una manera abreviada de hacerlo:
+
+\begin{verbatim}
+    std::cout "Pos X: " << p->getX() << std::endl;
+\end{verbatim}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Punteros - continuación}
+
+Existe un valor especial que se le puede asignar a un puntero, de manera tal que cual intento de desreferenciarlo nos produzca un error.
+
+Este valor es \emph{0}, a este valor se lo suele llamar puntero nulo (NULL POINTER).
+
+
+\begin{block}
+Cuando terminamos de usar un puntero o cuando todavía no tiene un valor definido, es buena costumbre asignarle el valor 0 a un puntero.
+De esta manera podemos saber si tiene un valor valido o no.
+\end{block}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Problemas con Punteros}
+Los punteros suelen ser la fuente de los problemas más comunes de programación en C++:
+
+\begin{itemize}
+ \item Acceder a un puntero no inicializado o no valido (memoria ya devuelta al sistema).
+ \item Perder o cambiarle el valor a un puntero que ya tiene un valor asignado.
+\end{itemize}
+
+El acceso a un puntero no valido puede provocar un comportamiento indifinido muy díficil de encontrar, inicializando correctamente los punteros y cargando el valor de puntero nulo si no tiene un valor actual es buena practica.
+
+El perder el acceso a una variable dinámica nos produce una perdida de memoria (leak).
+
+\end{frame}
+
+
+
 \subsection{new [] y delete []}
 \begin{frame}
 \frametitle{new [] y delete []}
 
 \end{frame}
 
-\subsection{Punteros}
-\begin{frame}
-\frametitle{Punteros}
-  
- - No solo de clases sino también de tipos básicos
-
-\end{frame}
-
 \subsection{Leaks}
 \begin{frame}
 \frametitle{Leaks}
-  
+
+Las perdidas de memoria se producen 
 
 \end{frame}
 
@@ -117,7 +198,8 @@ El destructor correspondiente a ese objeto es llamado y la memoria liberada.
 \subsection{operador this}
 \begin{frame}
 \frametitle{operador this}
-  Este operador hace referencia a la instancia especifica de la clase. Es de tipo puntero 
+  Este operador hace referencia a la instancia especifica de la clase y es válido solamente en los métodos de instancia de cualquier clase.
+
 \end{frame}
 
 \section{Herencia de clases}
