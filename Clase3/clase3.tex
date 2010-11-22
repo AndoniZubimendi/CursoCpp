@@ -232,19 +232,16 @@ Las perdidas de memoria se producen cuando no liberamos toda la memoria que hemo
 
 \end{frame}
 
-\section{Clases}
-
 \subsection{operador this}
 \begin{frame}
 \frametitle{operador this}
-  Este operador es valido solamente dentro de cualquier método de instancia de cualquier clase. 
-  Apunta a la instancia (es un puntero) específica del objeto que esta ejecutando el método.
+  Este operador es valido solamente dentro de cualquier método de instancia de cualquier clase. \\ 
+  Apunta a la instancia (es un puntero) específica del objeto que esta ejecutando el método. \\
   Puede ser usado como cualquier otra variable de instancia.
 
 \end{frame}
 
 \section{Herencia de clases}
-
 \subsection{Subclases}
 \begin{frame}[fragile]
 \frametitle{Subclases}
@@ -275,41 +272,127 @@ Si bien no es muy común y en la mayoría de los casos recomendamos no usarla.
 
 \begin{verbatim}
  class Avion : public Transporte,
-               public  {
+               public BuscarMejorEjemplo {
    public:
       Avion();
  };
 \end{verbatim}
 
+\end{frame}
+
+\subsection{Punteros y Polimorfismo}
+\begin{frame}
+\frametitle{Punteros y Polimorfismo}
+C++ nos deja aprovechar el carácter polimorfico de los objetos a través de los punteros.
+A un puntero de una clase base puede apuntar a un objeto de esa clase o de cualquier subclase.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Punteros y Polimorfismo - Ejemplo}
+\begin{verbatim}
+#include <iostream>
+class A {
+public:
+    void imprime() {
+        std::cout << "hola, soy A" << std::endl;
+    }
+};
+
+class B : public A {
+public:
+   void imprime() {
+      std::cout << "hola, soy B" << std::endl;
+   }
+};
+
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Punteros y Polimorfismo - Ejemplo}
+\begin{verbatim}
+
+void imprimir(A *objeto) {
+   std::cout << "objeto metodo imprime()" << std::endl;
+   objeto->imprime();
+} 
+int main(int argc, char **argv) {
+   A *objetoA = new A;
+   B *objetoB = new B;
+   imprimir(objetoA);
+   imprimir(objetoB);
+
+   delete objetoA; delete objetoB;
+   return 0;
+}
+\end{verbatim}
 
 \end{frame}
 
 \subsection{Métodos virtuales}
 \begin{frame}
 \frametitle{Métodos virtuales}
-Que significa? 
-Diferencias con otros lenguajes
+¿Qué pasó? \\
+
+Por cuestiones de eficiencia, las busquedas de los métodos polimorficos en C++ no se buscan en las subclases.
+Para indicarle al compilador de C++ que un método es polimorfico debemos anteponer al mismo la palabra clave ``virtual''.
+En C++ llamamos a estos métodos virtuales.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Punteros y Polimorfismo - Ejemplo Corregido}
+\begin{verbatim}
+#include <iostream>
+class A {
+public:
+    virtual void imprime() {
+        std::cout << "hola, soy A" << std::endl;
+    }
+};
+
+class B : public A {
+public:
+   void imprime() {
+      std::cout << "hola, soy B" << std::endl;
+   }
+};
+
+\end{verbatim}
+
 \end{frame}
 
 
-
 \subsection{Clases abstractas}
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{Clases abstractas}
 
- = 0 en los métodos.
+Cuando diseñamos clases abstractas, podemos querer dejar la implementación de una función a las subclases.
+Podemos hacerlo igualando a cero el método que queremos marcar como abstracto.
+
+\begin{verbatim}
+ 
+  class Figura {
+public:
+     Figura();
+
+     virtual int area() = 0;
+  };
+\end{verbatim}
+
+Obviamente, no podremos instanciar un objeto de una clase que contenga por lo menos un método abstracto.
 \end{frame}
 
 \subsection{Interfaces}
 \begin{frame}
 \frametitle{Interfaces}
-  - Podemos usar la herencia multiple para definir interfaces
+Si bien C++ no nos ofrece interfaces como Java, podemos lograr un resultado similar haciendo:
+\begin{itemize}
+  \item Definimos la interface como una clase abstracta con todos los mensajes que queremos que tenga la interfaz. Cada uno de estos métodos los indicamos como abstractos.
+  \item A la clase que queremos que tenga esa interfaz, la hacemos heredar a partir de la clase creada en el paso anterior.
+\end{itemize}
 \end{frame}
-
-\subsection{Punteros y Polimorfismo}
-\begin{frame}
-\frametitle{Punteros y Polimorfismo}
-\end{frame}
-
 
 \end{document}
