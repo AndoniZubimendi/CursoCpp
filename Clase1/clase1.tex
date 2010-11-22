@@ -237,7 +237,7 @@ También tenemos las variantes \emph{unsigned} para la mayoria de los tipos.
  \item $+$, $-$, $*$
  \item $/$, división entera si los tipos son enteros.
  \item \%: modulo 
- \item Mascaras de Bits: \^, \&, $|$, $~$
+ \item Mascaras de Bits: \^{ }, \&, $|$, $~$
  \item $==$, $!=$, \&\&, $||$, $!$
  \item $<$, $<=$, $>$, $>=$
  \item $+=$, $*=$, ...
@@ -276,7 +276,7 @@ Los parámetros son una lista de parametros de la siguiente manera:
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Funciones}
+\frametitle{Declaración y Definición}
 
 Las funciones deben declararse antes de ser usadas. \\
 La definición de la función sirve como declaración. \\
@@ -339,9 +339,9 @@ Luego de un parámetro con valor predeterminado, no puede haber un parámetro si
 \begin{frame}
 \begin{itemize}
  \item Cada instrucción deberá terminar con $;$
+ \item En lugar de una instrucción siempre puedo colocar un bloque. El bloque esta delimitado por \{ y \}.
  \item Los bloques pueden contener 0, 1 o más instrucciones. 
  \item Los bloques definen un nuevo alcance para las variables que definamos dentro de ese bloque, como veremos más adelante.
- \item En cualquier lugar donde es legal poner una instrucción, se puede insertar un bloque de instrucciones.
 \end{itemize}
 \end{frame}
 

@@ -174,7 +174,7 @@ Si no se indica nada la visibilidad será \emph{Private}.
   }
 \end{verbatim}
 
-\begin{block}
+\begin{block}{}
 Es conveniente separar la declaración y la definición en archivos diferentes.
 \end{block}
 \end{frame}
@@ -194,7 +194,7 @@ Podemos tener más de un constructor, es decir podemos sobrecargarlo.
 
 Creamos instancias de un objeto invocando a uno de los constructores de la clase.
 
-En el constructor podemos reservar e inicializar los aspectos del objeto que sean necesarios.
+En el constructor podemos reservar e inicializar los recursos del objeto que sean necesarios.
 
 \end{frame}
 
@@ -232,9 +232,9 @@ El destructor es uno solo, a diferencia de los constructores.
 
 El destructor no toma parámetros ni devuelve parámetros.
 
-El nombre del método será un $~$ seguido del nombre de la clase.
+El nombre del método será un \~{ } seguido del nombre de la clase.
 
-\begin{block}
+\begin{block}{}
 Acordarse de liberar recursos utilizados por el objeto.
 \end{block}
 
@@ -276,7 +276,7 @@ Acordarse de liberar recursos utilizados por el objeto.
  \item Como modificador - antes - de una variable, es una constante.
  \item Como modificador - antes - de un párametro, que ese parámetro no se puede modificar.
 
- \item Al final la declaración de un metodo, que dicho método no modifica el estado del objeto. Esto le permite al compilador realizar optimizaciones.
+ \item Al final de la declaración de un método, que dicho método no modifica el estado del objeto. Esto le permite al compilador realizar optimizaciones.
 \end{itemize}
 \end{frame}
 
@@ -299,8 +299,8 @@ Una vez asociada una referencia con una variable, no se puede cambiar. En el mom
 Dentro de una función o método podemos retornar una referencia a una variable.
 
 
-\begin{block}
- OJO! Con las referencias a las variables locales
+\begin{block}{OJO!}
+Con las referencias a las variables locales
 \end{block}
 
 \end{frame}
@@ -314,7 +314,8 @@ Hasta ahora habiamos visto que todas las pasajes de parámetros a funciones o m�
 \begin{verbatim}
    Matriz multiplicar(Matriz &m, Matriz &n);
 \end{verbatim}
-Si no pasaramos por referencia, los objetos 
+Si no pasaramos por referencia, la función recibiria una copia de los objetos y no los mismos objetos.
+También podemos pasar una referencia constante a un objeto.
 \end{frame}
 
 \section{Operador static}
@@ -360,7 +361,7 @@ Sabiendo que C++ separa claramente la definición de la declaración de tipos de
 \begin{itemize}
  \item Estos archivos suelen tener la extensión \emph{.h} y llevan el mismo nombre que el archivo de implementación.
  \item Aqui escribiremos todas las definiciones que necesitemos usar del archivo de implementación.
- \item Los archivos de encabezado se incluyen con la directiva de preprocesador \emph{\#incldue}.
+ \item Los archivos de encabezado se incluyen con la directiva de preprocesador \emph{\#include}.
 \end{itemize}
 
 \end{frame}
@@ -368,22 +369,19 @@ Sabiendo que C++ separa claramente la definición de la declaración de tipos de
 \subsection{Guardas en los encabezados}
 \begin{frame}[fragile]
 \frametitle{Guardas en los archivos de encabezados}
-a.h:
+En archivo a.h:
 \begin{verbatim}
 #include "b.h"
-
-struct A
-{
+struct A {
   struct B *b;
 } A;
 \end{verbatim}
 
-b.h:
+En archivo b.h:
 \begin{verbatim}
 #include "a.h"
 
-typedef struct B
-{
+typedef struct B {
   struct A *a;
 } B;
 \end{verbatim}
@@ -395,21 +393,25 @@ typedef struct B
 \frametitle{Guardas en los archivos de encabezados}
 Para evitar esto, usamos guardas sobre los archivos de encabezados.
 
+Archivo a.h:
 \begin{verbatim}
 #ifndef __A_H__
 #define __A_H__
 
 #include "b.h"
 
-struct A
-{
+struct A {
   struct B *b;
 } A;
 
 #endif
 \end{verbatim}
+\end{frame}
 
-b.h:
+\begin{frame}[fragile]
+\frametitle{Guardas en los archivos de encabezados}
+
+Archivo b.h:
 \begin{verbatim}
 #ifndef __B_H__
 #define __B_H__

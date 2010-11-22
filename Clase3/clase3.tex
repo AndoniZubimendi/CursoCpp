@@ -120,21 +120,30 @@ El acceso al valor apuntado se llama desreferenciar y se puede hacer con el oper
 \begin{verbatim}
     class Punto {
       public:
-	  Punto(int x, int y);
-	  int getX();
-          int getY();
+        Punto(int x, int y);
+        int getX();
+        int getY();
       private:
-	  int _x, _y;
+        sint _x, _y;
     };
 
     Punto * p = new Punto(10,10);
 \end{verbatim}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+\frametitle{Punteros - continuación}
 
 Como puedo invocar al metodo \emph{getX} de \emph{p} ?
 
 \begin{verbatim}
     std::cout "Pos X: " << (*p).getX() << std::endl;
 \end{verbatim}
+
+Notar el parentesis, para que el operador ``*'' se aplique antes que el operador ``.''.
+
 
 Como el acceso a miembros de una estructura o clase a partir de un puntero es una operación común, tenemos una manera abreviada de hacerlo:
 
@@ -150,17 +159,15 @@ Como el acceso a miembros de una estructura o clase a partir de un puntero es un
 
 Existe un valor especial que se le puede asignar a un puntero, de manera tal que cual intento de desreferenciarlo nos produzca un error.
 
-Este valor es \emph{0}, a este valor se lo suele llamar puntero nulo (NULL POINTER).
+Este valor es \emph{0}, a este valor se lo suele llamar puntero nulo (NULL POINTER). En nuestro programa podemos usar la constante NULL como
+equivalente del puntero nulo.
 
-
-\begin{block}
+\begin{block}{}
 Cuando terminamos de usar un puntero o cuando todavía no tiene un valor definido, es buena costumbre asignarle el valor 0 a un puntero.
 De esta manera podemos saber si tiene un valor valido o no.
 \end{block}
 
 \end{frame}
-
-
 
 \begin{frame}[fragile]
 \frametitle{Problemas con Punteros}
@@ -177,19 +184,51 @@ El perder el acceso a una variable dinámica nos produce una perdida de memoria 
 
 \end{frame}
 
-
-
 \subsection{new [] y delete []}
-\begin{frame}
+\begin{frame}[fragile]
 \frametitle{new [] y delete []}
 
+El operador emph{new[]} nos permite pedirle al sistema opertivo más de un elemento a la vez.
+Es muy importante utilizar el operador \emph{delete[]}, en lugar de \emph{delete} para liberar la memoria.
+\begin{verbatim}
+   int *enteros = new int[10];
+   for (int i = 0; i < 10; i++)
+      enteros[i] = i;
+     ...
+   delete [] enteros;
+\end{verbatim}
+
+¿Alguien nota algo raro?
 \end{frame}
+
+\subsection{Punteros y arreglos}
+\begin{frame}
+En el ejemplo anterior utilizamos al puntero como si fuera un arreglo.
+En C++, es común utilizar este tipo de notación.
+Esta es la manera alternativa de representarlo:
+\begin{verbatim}
+   int *enteros = new int[10];
+   for (int i = 0; i < 10; i++)
+      *(enteros + i) = i;
+     ...
+   delete [] enteros;
+ 
+\end{verbatim}
+
+\end{frame}
+
 
 \subsection{Leaks}
 \begin{frame}
 \frametitle{Leaks}
 
-Las perdidas de memoria se producen 
+Las perdidas de memoria se producen cuando no liberamos toda la memoria que hemos pedido al sistema operativo. Las causas mas comunes son:
+\begin{itemize}
+ \item No hacer \emph{delete} de todos los objetos alocados.
+ \item Utilizar \emph{delete} en lugar de \emph{delete[]}.
+ \item Pedir memoria dentro de una función o método y olvidarnos de liberar la memoria.
+ \item Olvidarnos de liberar toda la memoria pedida en un destructor de una clase.
+\end{itemize}
 
 \end{frame}
 
@@ -198,15 +237,13 @@ Las perdidas de memoria se producen
 \subsection{operador this}
 \begin{frame}
 \frametitle{operador this}
-  Este operador hace referencia a la instancia especifica de la clase y es válido solamente en los métodos de instancia de cualquier clase.
+  Este operador es valido solamente dentro de cualquier método de instancia de cualquier clase. 
+  Apunta a la instancia (es un puntero) específica del objeto que esta ejecutando el método.
+  Puede ser usado como cualquier otra variable de instancia.
 
 \end{frame}
 
 \section{Herencia de clases}
-\begin{frame}
-\frametitle{Herencia de clases}
-Herencia multiple.
-\end{frame}
 
 \subsection{Subclases}
 \begin{frame}[fragile]
@@ -217,11 +254,44 @@ Para definir una subclase lo hacemos de la siguiente manera:
 \begin{verbatim}
 
  class Cuadrado : public Figura {
- 
+   public:
+        Cuadrado(); 
  };
 \end{verbatim}
 
+De esta manera \emph{Cuadrado} se define como subclase de \emph{Figura}, teniendo acceso a 
+metodos y variables de instancia que hereda de la siguiente manera:
+\begin{itemize}
+ \item Los campos \emph{protected} de la clase base serán accesibles a los metodos de la clase
+ \item Los campos \emph{public} de la clase base serán accesibles desde los metodos y a los usuarios de los objetos.
+ \item Los campos \emph{private} de la clase, no serán accesible ni a los metodos ni a los usuarios de los objetos.
+\end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Herencia multiple}
+C++ nos ofrece herencia multiple para los objetos. 
+Si bien no es muy común y en la mayoría de los casos recomendamos no usarla.
+
+\begin{verbatim}
+ class Avion : public Transporte,
+               public  {
+   public:
+      Avion();
+ };
+\end{verbatim}
+
+
+\end{frame}
+
+\subsection{Métodos virtuales}
+\begin{frame}
+\frametitle{Métodos virtuales}
+Que significa? 
+Diferencias con otros lenguajes
+\end{frame}
+
+
 
 \subsection{Clases abstractas}
 \begin{frame}
@@ -236,13 +306,6 @@ Para definir una subclase lo hacemos de la siguiente manera:
   - Podemos usar la herencia multiple para definir interfaces
 \end{frame}
 
-\subsection{Métodos virtuales}
-\begin{frame}
-\frametitle{Métodos virtuales}
-Que significa? 
-Diferencias con otros lenguajes
-\end{frame}
-
 \subsection{Punteros y Polimorfismo}
 \begin{frame}
 \frametitle{Punteros y Polimorfismo}
@@ -250,4 +313,3 @@ Diferencias con otros lenguajes
 
 
 \end{document}
-
